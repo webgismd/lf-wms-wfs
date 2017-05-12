@@ -33,14 +33,14 @@
       });
 
 	  L.esri.tiledMapLayer({
-  url: 'http://test.maps.gov.bc.ca/arcserver/rest/services/province/roads_wm/MapServer',
+  url: 'https:/maps.gov.bc.ca/arcserver/rest/services/province/roads_wm/MapServer',
   maxZoom: 15
 }).addTo(map);
 
 	  
      var l = getURLParameters("l");
     
-  var owsrootUrl = 'http://openmaps.gov.bc.ca/geo/ows';
+  var owsrootUrl = 'https://openmaps.gov.bc.ca/geo/ows';
 
   var fclayer = L.tileLayer.wms(owsrootUrl, {
     format: 'image/png',
