@@ -7,16 +7,19 @@
   "HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
   <title>DataBC Public WMS</title>
   
-  <script src="./js/leaflet.ajax.js" type="text/javascript"></script>
+ <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js" type="text/javascript"></script>-->
   <script src="./js/proj4js/lib/proj4js-compressed.js" type=  "text/javascript"></script>
-  <script src="http://code.jquery.com/jquery-1.10.2.min.js" type=  "text/javascript"></script>
+ <script
+  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   
   <!-- Load Leaflet from CDN-->
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" />
-  <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+  <link rel="stylesheet" href="./js/leaflet.css" />
+  <script src="./js/leaflet.js"></script>
 
-  <!-- Load Esri Leaflet locally, after cloning this repository -->
-  <script src="http://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js"></script>
+ <!-- Load Esri Leaflet from CDN -->
+  <script src="http://unpkg.com/esri-leaflet@2.0.8"></script>
 
 	
 </head>
@@ -33,18 +36,26 @@
       });
 
 	  L.esri.tiledMapLayer({
-  url: 'http:/maps.gov.bc.ca/arcserver/rest/services/province/roads_wm/MapServer',
+  url: 'http://maps.gov.bc.ca/arcserver/rest/services/province/roads_wm/MapServer',
   maxZoom: 15
 }).addTo(map);
 
-	  
+
+	 // layer name parameter 
      var l = getURLParameters("l");
+	 // style name parameter 
+     var s = getURLParameters("s");
+	 // filter attribute parameter 
+     var a = getURLParameters("a");
+	 // filter statement parameter 
+     var f = getURLParameters("f");
     
   var owsrootUrl = 'http://openmaps.gov.bc.ca/geo/ows';
 
   var fclayer = L.tileLayer.wms(owsrootUrl, {
     format: 'image/png',
     transparent: true,
+	styles: s,
     layers: l
   }).addTo(map);
 
@@ -54,7 +65,7 @@
     var src = new Proj4js.Proj('EPSG:4326');
     var dst = new Proj4js.Proj('EPSG:3005');
     
-        map.on('click', function(e) {
+    map.on('click', function(e) {
         if (selectedFeature) {
             map.removeLayer(selectedFeature);
         }        
@@ -74,8 +85,8 @@
             srsName : 'EPSG:4326'
         };
 
-        var customParamsG = {cql_filter:'DWithin(GEOMETRY, POINT(' + p.x + ' ' + p.y + '), 15000, meters)'        };
-        var customParamsS = {cql_filter:'DWithin(SHAPE, POINT(' + p.x + ' ' + p.y + '), 15000, meters)'        };
+        var customParamsG = {cql_filter:'DWithin(GEOMETRY, POINT(' + p.x + ' ' + p.y + '), 1500, meters)'        };
+        var customParamsS = {cql_filter:'DWithin(SHAPE, POINT(' + p.x + ' ' + p.y + '), 1500, meters)'        };
         
         var url = owsrootUrl + L.Util.getParamString(L.Util.extend(defaultParameters, customParamsG));
         var retryurl = owsrootUrl + L.Util.getParamString( L.Util.extend(defaultParameters, customParamsS));
@@ -84,6 +95,86 @@
        
          retryfirst(url, retryurl);
                  });
+				 
+				 
+// add a graphic wfs layer baed on cql filter
+//exampe - 1.)	Parameter for cql_filter - https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_WRBC_SVW/ows?service=wfs&version=1.0.0&request=getfeature&typename=pub:WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_WRBC_SVW&PROPERTYNAME=WELL_TAG_NUMBER&CQL_FILTER=WELL_TAG_NUMBER=65501
+
+
+if( typeof f === 'undefined' || f === null ){
+    // Don't do anything zooming or selecting IF filter isnt defined
+	 console.log(l);
+} else {
+	console.log(f);
+	var defaultParameterswfs = {
+		service : 'WFS',
+		version : '2.0.0',
+		request : 'GetFeature',
+		typeName : l,
+		outputFormat : 'text/javascript',
+		format_options : 'callback:getJson',
+		SrsName : 'EPSG:4326',
+		PROPERTYNAME : a,
+		CQL_FILTER : f
+
+	};
+
+	var parameterswfs = L.Util.extend(defaultParameterswfs);
+	var URL = owsrootUrl + L.Util.getParamString(parameterswfs);
+	var WFSLayer = null;
+	var ajax = $.ajax({
+		url : URL,
+		dataType : 'jsonp',
+		jsonpCallback : 'getJson',
+		success : function (response) {
+			
+			WFSLayer = L.geoJson(response, {
+				style: function (feature) {
+					return {
+						stroke: true,
+						fillColor: '00FFFF',
+						fillOpacity: 1
+					};
+				},
+				onEachFeature: function (feature, layer) {
+					
+					popupOptions = {maxWidth: 200};
+						// does this feature have a property named popupContent?
+						if (feature.properties && feature.properties.popupContent) {
+							layer.bindPopup(feature.properties.popupContent);
+						}
+				}
+			});
+        	
+			WFSLayer.addTo(map);
+			console.log(response);
+
+
+			var corner1 = L.latLng(response.features[0].properties.bbox[1], response.features[0].properties.bbox[0]);
+			var corner2 = L.latLng(response.features[0].properties.bbox[3], response.features[0].properties.bbox[2]);
+			bounds = L.latLngBounds(corner1, corner2);
+			console.log(bounds)
+			console.log(corner1)
+			console.log(corner2)
+			if (bounds) {
+              map.fitBounds(bounds, {maxZoom: 15});
+			}
+			 
+		}
+	});
+}
+
+
+function zoomFunction(bounds, layer) {
+
+    var array = bounds.name.split(',');
+
+    map.fitBounds(
+    L.latLngBounds(
+    L.latLng(array[1], array[0]),
+    L.latLng(array[3], array[2])));
+
+}
     
   function retryfirst(url, retryurl) {
              $.ajax({
@@ -193,7 +284,7 @@
                 arrParamValues[i] = unescape(sParam[1]);
                                 }
             else{
-                arrParamValues[i] = "No Value";
+                arrParamValues[i] = "";
                                 }
         }
 
@@ -205,7 +296,7 @@
                 return arrParamValues[i];
             }
         }
-        return "No Parameters Found";
+        return "";
     }
   }
   </script>
