@@ -19,6 +19,7 @@ to get the first feature and the feature count of a layer in JSON:
 http://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=json&typeName=WHSE_BASEMAPPING.GRID_HEX_CDN_25_SQKM_SP&count=1<br><br>
 
 reference - 
-https://docs.geoserver.org/
-https://docs.geoserver.org/latest/en/user/services/index.html#services
-https://catalogue.data.gov.bc.ca/dataset/6164a2af-d3ac-4e92-8dbe-51a93bb5e24b
+https://docs.geoserver.org/<br>
+https://docs.geoserver.org/latest/en/user/services/index.html#services<br>
+https://catalogue.data.gov.bc.ca/dataset/6164a2af-d3ac-4e92-8dbe-51a93bb5e24b<br>
+https://leafletjs.com/reference-1.6.0.html
