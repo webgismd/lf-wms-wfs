@@ -16,4 +16,9 @@ WMS LAYER CQL_FILTER - f=WELL_TAG_NUMBER%3D71003 (encoded cql filter statement)<
 to find style name go to http://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP/wms?SERVICE=WMS&REQUEST=Getcapabilities<br><br>
 to find attributes go to http://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP/wfs?SERVICE=WFS&REQUEST=describefeaturetype<br><br>
 to get the first feature and the feature count of a layer in JSON:
-http://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=json&typeName=WHSE_BASEMAPPING.GRID_HEX_CDN_25_SQKM_SP&count=1
+http://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=json&typeName=WHSE_BASEMAPPING.GRID_HEX_CDN_25_SQKM_SP&count=1<br><br>
+
+reference - 
+https://docs.geoserver.org/
+https://docs.geoserver.org/latest/en/user/services/index.html#services
+https://catalogue.data.gov.bc.ca/dataset/6164a2af-d3ac-4e92-8dbe-51a93bb5e24b
