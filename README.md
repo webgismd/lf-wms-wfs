@@ -13,5 +13,5 @@ WMS LAYER STYLE - s=1842 (style name)<br>
 WMS LAYER ATTRIBUTE TO FILTER ON - a=WELL_TAG_NUMBER (attribute/field name)<br>
 WMS LAYER CQL_FILTER - f=WELL_TAG_NUMBER%3D71003 (encoded cql filter statement)<br>
 
-to find style name go to http://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP/wms?SERVICE=WMS&REQUEST=Getcapabilities
+to find style name go to http://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP/wms?SERVICE=WMS&REQUEST=Getcapabilities<br>
 to find attributes go to http://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP/wfs?SERVICE=WFS&REQUEST=describefeaturetype
