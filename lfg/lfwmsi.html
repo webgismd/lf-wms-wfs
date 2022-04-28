@@ -7,10 +7,10 @@
   "HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
   <title>DataBC Public WMS</title>
   
- <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js" type="text/javascript"></script>-->
+ <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js" type="text/javascript"></script>-->
   <script src="./js/proj4js/lib/proj4js-compressed.js" type=  "text/javascript"></script>
  <script
-  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
   
@@ -19,7 +19,7 @@
   <script src="./js/leaflet.js"></script>
 
  <!-- Load Esri Leaflet from CDN -->
-  <script src="http://unpkg.com/esri-leaflet@2.0.8"></script>
+  <script src="https://unpkg.com/esri-leaflet@2.0.8"></script>
 
 	
 </head>
@@ -36,7 +36,7 @@
       });
 
 	  L.esri.tiledMapLayer({
-  url: 'http://maps.gov.bc.ca/arcserver/rest/services/province/roads_wm/MapServer',
+  url: 'https://maps.gov.bc.ca/arcserver/rest/services/province/roads_wm/MapServer',
   maxZoom: 15
 }).addTo(map);
 
@@ -50,7 +50,7 @@
 	 // filter statement parameter 
      var f = getURLParameters("f");
     
-  var owsrootUrl = 'http://openmaps.gov.bc.ca/geo/ows';
+  var owsrootUrl = 'https://openmaps.gov.bc.ca/geo/ows';
 
   var fclayer = L.tileLayer.wms(owsrootUrl, {
     format: 'image/png',
