@@ -1,9 +1,9 @@
 # lf-wms-wfs
 leaftlet app with wms/wfs
 
-Example see - http://delivery.openmaps.gov.bc.ca/kml/m/lf-wms-wfs-master/lfg/lfwmsi.html?l=WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP&s=1842&a=WELL_TAG_NUMBER&f=WELL_TAG_NUMBER%3D71003<br>
+Example see - https://webgismd.github.io/lf-wms-wfs/lfg/lfwmsi.html?l=WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_LITHOLOGY_SP&s=1842&a=WELL_TAG_NUMBER&f=WELL_TAG_NUMBER%3D71003<br>
 
-or http://delivery.openmaps.gov.bc.ca/kml/m/lfg103/lfwmsi2.html?l=WHSE_BASEMAPPING.BCGS_2500_GRID&a=OBJECTID&f=OBJECTID%3D64688<br>
+or https://webgismd.github.io/lf-wms-wfs/lfg/lfwmsi.html?l=WHSE_BASEMAPPING.BCGS_2500_GRID&a=OBJECTID&f=OBJECTID%3D64688<br>
 
 Leaflet app that has URL parameters for WMS parameters (zoom to and identify functions available based on parameters given) <br>
 <br>
