@@ -5,6 +5,8 @@ Example see - https://webgismd.github.io/lf-wms-wfs/lfg/lfwmsi.html?l=WHSE_WATER
 
 or https://webgismd.github.io/lf-wms-wfs/lfg/lfwmsi.html?l=WHSE_BASEMAPPING.BCGS_2500_GRID&a=OBJECTID&f=OBJECTID%3D64688<br>
 
+or https://webgismd.github.io/lf-wms-wfs/lfg/lfwmsi.html?l=WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_FA_SVW&a=PLAN_ID&f=PLAN_ID%3D495161
+
 Leaflet app that has URL parameters for WMS parameters (zoom to and identify functions available based on parameters given) <br>
 <br>
 URL PARAMETERS:<br>
