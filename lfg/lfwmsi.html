@@ -150,8 +150,8 @@ if( typeof f === 'undefined' || f === null ){
 			console.log(response);
 
 
-			var corner1 = L.latLng(response.features[0].properties.bbox[1], response.features[0].properties.bbox[0]);
-			var corner2 = L.latLng(response.features[0].properties.bbox[3], response.features[0].properties.bbox[2]);
+			var corner1 = L.latLng(response.features[0].bbox[1], response.features[0].bbox[0]);
+			var corner2 = L.latLng(response.features[0].bbox[3], response.features[0].bbox[2]);
 			bounds = L.latLngBounds(corner1, corner2);
 			console.log(bounds)
 			console.log(corner1)
